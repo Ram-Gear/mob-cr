@@ -7,7 +7,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
 .site-header{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
-  padding:.8rem 1.4rem;background:linear-gradient(#2b3d47,#1d2b33);color:#fff;border-bottom:6px solid #2e7386}
+  padding:10px 1.4rem;background:linear-gradient(#2b3d47,#1d2b33);color:#fff;border-bottom:6px solid #2e7386}
 .brand{display:flex;align-items:center;gap:.9rem}
 .logo{width:46px;height:46px;border-radius:6px;background:var(--brand);color:#fff;display:grid;place-items:center;
   font-weight:800;letter-spacing:.5px;font-size:1.1rem;border:2px solid var(--accent)}
@@ -126,3 +126,6 @@ table.results td.num,table.results th.num{text-align:right;font-family:var(--mon
 .practice details{margin-top:.4rem}
 .flag{color:var(--warn);font-size:.85rem}
 .help-main{max-width:900px;margin:0 auto;padding:1rem 1.4rem}
+.site-header .company{line-height:16px}
+.site-header h1{line-height:30px}
+.site-header h1 .sub{line-height:1}
