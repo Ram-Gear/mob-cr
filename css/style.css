@@ -129,3 +129,50 @@ table.results td.num,table.results th.num{text-align:right;font-family:var(--mon
 .site-header .company{line-height:16px}
 .site-header h1{line-height:30px}
 .site-header h1 .sub{line-height:1}
+/* MOB CR print (Letter) */
+@media print{
+  @page{size:letter;margin:.5in .55in}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff!important;color:#000}
+  .site-header,.header-actions,.actions,.btn,nav,video,#video video{display:none!important}
+  .print-head{display:block;border-bottom:2px solid #000;padding-bottom:.25rem;margin-bottom:.5rem;font-size:9.5pt}
+  .print-head .ptitle{font-size:14pt}
+  .site-footer{display:block!important;color:#000;font-size:8pt;padding:.4rem 0 0;border-top:1px solid #999;margin-top:.5rem}
+  .layout,.help-main{display:block;padding:0;max-width:none}
+  .card,.practice,table.results,#glossary tr{break-inside:avoid;page-break-inside:avoid}
+  #glossary{break-inside:auto}
+  .card{margin-bottom:.5rem}
+  .card-head{border-bottom:1px solid #000}
+  .field{display:flex;align-items:baseline;gap:.5rem;margin-bottom:.15rem;break-inside:avoid}
+  .field label{width:55%;margin:0;font-size:9.5pt}
+  .inp{flex:1}
+  input{border:none!important;background:none!important;color:#000!important;padding:0!important;font-weight:700;font-size:10pt!important;min-width:0}
+  .u,.units,small{color:#333}
+  .results td,.results th{color:#000;font-size:9.5pt;padding:.12rem .4rem}
+  a{color:#000;text-decoration:none}
+  details>summary{list-style:none}
+}
+@media print{
+  #form{display:grid;grid-template-columns:1fr 1fr;column-gap:1.2rem}
+  #form .field label{width:60%}
+  .inp{gap:.4rem}
+  #out details{display:none}
+  .layout>.card:last-child{break-inside:auto;page-break-inside:auto}
+  .results td,.results th{font-size:9pt;padding:.06rem .4rem}
+  .big{font-size:10.5pt}
+  #out h3{margin:.4rem 0 .1rem}
+}
+@media print{
+  #form .field label{width:7.5rem;flex:none}
+  #form .field label small{display:none}
+  #form .field:has(#F29){grid-column:1 / -1}
+  #form .field:has(#F29) .inp{max-width:50%}
+  table.results td,table.results th{padding:.05rem .4rem!important;line-height:1.25}
+  #out h3{break-after:avoid;page-break-after:avoid}
+}
+@media print{
+  #glossary,#glossary table.results,#glossary tbody{break-inside:auto!important;page-break-inside:auto!important}
+  #glossary h2{break-after:avoid}
+  #glossary thead{display:table-header-group}
+  #video>div{display:block!important}
+}
