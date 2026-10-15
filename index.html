@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOB CR – Measurement Over Balls to CR, Chordal &amp; Span | Ram-Gear Manufacturing</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="site-header">
+  <div class="brand"><img class="app-icon" src="icon.svg" width="46" height="46" alt="MOB CR icon">
+    <div><div class="company">Ram-Gear Manufacturing Inc.</div>
+    <h1>MOB CR <span class="sub">Measurement Over Balls → CR, Chordal &amp; Span</span></h1></div></div>
+  <nav class="header-actions">
+    <button type="button" class="btn" onclick="window.print()">Print</button>
+    <a class="btn btn-ghost" href="help.html">Practice</a>
+    <a class="btn btn-ghost" id="btnHelp" href="https://grok.com/?q=I%27m%20using%20Ram-Gear%27s%20MOB%20CR%20app%2C%20a%20browser%20rebuild%20of%20Roger%20Blake%27s%20spreadsheet%20that%20converts%20measurement%20over%20balls%20%28MOB%29%20to%20comparator%20readings%20%28CR%29%2C%20chordal%20dimensions%20and%20span%20dimensions%20for%20stub%20tooth%20herringbone%20gears%20or%20pinions%20with%20an%20even%20number%20of%20teeth.%20Can%20you%20give%20me%20pointers%20on%20how%20to%20use%20it%3F" target="_blank" rel="noopener" title="Ask Grok how to use MOB CR (opens in a new tab)">Help</a>
+  </nav>
+</header>
+<main class="layout">
+<section class="card" aria-labelledby="inT">
+  <div class="card-head"><h2 id="inT">Gear data</h2><span class="units">inch · stub tooth DPT/PAT, even tooth count</span></div>
+  <form id="form" autocomplete="off">
+    <div class="field"><label for="C9">NP or NG <small>(number of teeth, even)</small></label><div class="inp"><input id="C9" inputmode="numeric"></div></div>
+    <div class="field"><label for="C10">DPT <small>(transverse diametral pitch)</small></label><div class="inp"><input id="C10" inputmode="decimal"></div></div>
+    <div class="field"><label for="C11">PAT <small>(transverse pressure angle)</small></label><div class="inp"><input id="C11" inputmode="decimal"><span class="u">deg</span></div></div>
+    <div class="field"><label for="C12">HA <small>(helix angle)</small></label><div class="inp"><input id="C12" inputmode="decimal"><span class="u">deg</span></div></div>
+    <div class="field"><label for="C13">OD <small>(outside diameter)</small></label><div class="inp"><input id="C13" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="C14">MAX MOB</label><div class="inp"><input id="C14" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="C15">MIN MOB</label><div class="inp"><input id="C15" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="C16">Ball diameter</label><div class="inp"><input id="C16" inputmode="decimal"><span class="u">in</span></div></div>
+    <div class="field"><label for="F29">Span over <small>(three tooth counts)</small></label><div class="inp"><input id="F29" inputmode="numeric" style="min-width:0"><input id="F30" inputmode="numeric" style="min-width:0"><input id="F31" inputmode="numeric" style="min-width:0"></div></div>
+    <div class="err" id="err"></div>
+    <div class="actions"><button type="submit" class="btn btn-primary">Calculate</button>
+      <button type="button" class="btn btn-ghost" id="btnExample">Load example (L&amp;H LHMS10634)</button></div>
+  </form>
+</section>
+<section class="card" aria-labelledby="rT">
+  <div class="card-head"><h2 id="rT">Results</h2></div>
+  <div id="out"></div>
+</section>
+</main>
+<footer class="site-footer">Original app by Roger Blake (Herringbone Gear Tech Services, program “MOB to CR BS Span ST DPT PAT Even”, rev. 08 Mar 17). Browser version by Ram-Gear Manufacturing Inc. Answers should be used only with the judgment and approval of a qualified, experienced gear engineer.</footer>
+<script src="calc.js"></script>
+<script>
+const F=MobCR.INPUTS;const f=(x,d)=>Number.isFinite(x)?x.toFixed(d):'—';
+function load(o){F.forEach(k=>document.getElementById(k).value=o[k]);}
+function run(e){e&&e.preventDefault();const err=document.getElementById('err');err.textContent='';const inp={};
+ for(const k of F){const v=parseFloat(document.getElementById(k).value);if(!Number.isFinite(v)||v<=0){err.textContent='Enter a positive number in every field.';return;}inp[k]=v;}
+ if(inp.C9%2)err.textContent='Note: this method is for an EVEN number of teeth.';
+ if(inp.C15>inp.C14){err.textContent='MIN MOB must not exceed MAX MOB.';return;}
+ const c=MobCR.calc(inp);
+ const row=(a,k1,k2,d,big)=>'<tr><td>'+a+'</td><td class="num">'+(big?'<span class="big">':'')+f(c[k1],d)+(big?'</span>':'')+'</td><td class="num">'+(big?'<span class="big">':'')+f(c[k2],d)+(big?'</span>':'')+'</td></tr>';
+ const one=(a,k,d)=>'<tr><td>'+a+'</td><td class="num">'+f(c[k],d)+'</td></tr>';
+ const head=t=>'<table class="results"><thead><tr><th>'+t+'</th><th class="num">MAX</th><th class="num">MIN</th></tr></thead><tbody>';
+ let h=head('Item')+row('<b>Comparator reading (CR)</b>','H10','I10',4,1)+'</tbody></table>';
+ h+=head('Chordal dimensions')+row('Chordal addendum','H21','I21',4,1)+row('Chordal thickness','H22','I22',4,1)+'</tbody></table>';
+ h+=head('Span dimensions');[29,30,31].forEach(r=>h+=row('Span over '+inp['F'+r]+' teeth','H'+r,'I'+r,4,1));h+='</tbody></table>';
+ h+='<table class="results"><tbody>'+one('Theoretical no. of teeth to span','I33',4)+'<tr><td>Min. face width to span '+inp.F30+' teeth</td><td class="num">'+f(c.I35,3)+'</td></tr>'+one('Reference dia. for chordal addendum','I24',4)+'</tbody></table>';
+ h+=head('Other results')+row('Ball contact diameter','H39','I39',4)+row('Theoretical ball dia. for contact @ PD','H44','I44',4)+row('CTTT @ PD','H48','I48',4)+row('CTTN @ PD','H49','I49',4)+row('CTTT @ BD','H50','I50',4)+'</tbody></table>';
+ h+='<h3>CRs based on</h3><table class="results"><tbody>'+one('DPB','I13',4)+one('AB = 0.8/DPT','I14',4)+one('PAB','I15',4)+one('TB @ AB','I16',4)+one('PD','H41',4)+one('AM','I52',4)+one('AMC','I53',4)+one('AMF','I54',4)+'</tbody></table>';
+ h+='<details><summary>Working values (spreadsheet cells)</summary><table class="results"><tbody>';
+ [['PAN','C22'],['DPN','C24'],['BPT','C28'],['BPN','C29'],['STD OD','C31'],['MN','C33'],['BHA','C58'],['BD','C63'],['h','C66'],['INVPAT','C75'],["S'T",'C76']].forEach(([a,k])=>h+=one(a+' <small>'+k+'</small>',k,8));
+ h+='</tbody></table><table class="results"><thead><tr><th>Item</th><th class="num">MAX</th><th class="num">MIN</th></tr></thead><tbody>';
+ [['DW','66'],['PAT @ DW','68'],['INVPAT @ DW','69'],['X','70'],['CR','71'],['CTTT @ BD','72'],['Rc','73'],['dt','74'],['BCD (Van Gerpen-Reese)','82'],['CTTN @ BD','83'],['F = PA to tangency','84'],['2·RF','87']].forEach(([a,r])=>h+=row(a+' <small>H/I'+r+'</small>','H'+r,'I'+r,8));
+ h+='</tbody></table></details>';
+ document.getElementById('out').innerHTML=h;}
+document.getElementById('form').addEventListener('submit',run);
+document.getElementById('btnExample').onclick=()=>{load(MobCR.EXAMPLE);run();};
+load(MobCR.EXAMPLE);run();
+</script>
+</body></html>

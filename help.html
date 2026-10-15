@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOB CR – Help &amp; Practice | Ram-Gear Manufacturing</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="icon" type="image/png" href="favicon.png"><link rel="stylesheet" href="css/style.css"></head>
+<body>
+<header class="site-header"><div class="brand"><img class="app-icon" src="icon.svg" width="46" height="46" alt="MOB CR icon">
+<div><div class="company">Ram-Gear Manufacturing Inc.</div><h1>MOB CR <span class="sub">Help &amp; practice</span></h1></div></div>
+<nav class="header-actions"><a class="btn" href="index.html">Back to app</a></nav></header>
+<main class="help-main">
+<section class="card"><h2>What it does</h2>
+<p>Given the blank data and the drawing's MAX/MIN <b>measurement over balls (MOB)</b> and ball diameter, MOB CR converts the MOB tolerance into a <b>comparator reading (CR)</b>, <b>chordal addendum &amp; thickness</b> (gear tooth caliper) and <b>span measurements</b> over N teeth, for stub tooth DPT/PAT herringbone gears or pinions with an <b>even</b> number of teeth (basic addendum 0.8/DPT).</p>
+<p><a href="https://grok.com/?q=Explain%20how%20measurement%20over%20balls%20(MOB)%20on%20a%20helical%20or%20herringbone%20gear%20with%20an%20even%20number%20of%20teeth%20relates%20to%20tooth%20thickness%2C%20chordal%20thickness%20and%20span." target="_blank" rel="noopener">Ask Grok: how does MOB relate to tooth thickness?</a></p></section>
+
+<div class="practice"><h3>Practice 1 – comparator reading</h3>
+<p>L&amp;H pinion LHMS10634: 16 teeth, 2 DPT, 25° PAT, 30° HA, OD 9.4, MOB 9.5637 / 9.5600 over 0.824 balls. CR range?</p>
+<details><summary>Show answer</summary><p>CR MAX 0.1260, MIN 0.1235 (based on DPB 2, AB 0.4, PAB 21.99°, TB 0.6802, OD 9.4).</p></details>
+<p><a href="https://grok.com/?q=What%20is%20a%20comparator%20reading%20(CR)%20when%20checking%20gear%20tooth%20thickness%20and%20how%20is%20it%20used%20in%20a%20gear%20shop%3F" target="_blank" rel="noopener">Ask Grok: what is a comparator reading?</a></p></div>
+
+<div class="practice"><h3>Practice 2 – chordal dimensions</h3>
+<p>Same pinion. Chordal addendum and chordal thickness to set on a gear tooth caliper?</p>
+<details><summary>Show answer</summary><p>Addendum 0.7211; thickness MAX 0.8213, MIN 0.8193 (referenced to the 9.4 OD).</p></details>
+<p><a href="https://grok.com/?q=How%20do%20I%20measure%20chordal%20tooth%20thickness%20with%20a%20gear%20tooth%20vernier%20caliper%2C%20and%20why%20does%20the%20chordal%20addendum%20depend%20on%20the%20actual%20outside%20diameter%3F" target="_blank" rel="noopener">Ask Grok about gear tooth calipers</a></p></div>
+
+<div class="practice"><h3>Practice 3 – span</h3>
+<p>Same pinion: span over 2, 3 and 4 teeth, and minimum face width for 3?</p>
+<details><summary>Show answer</summary><p>2 teeth 2.2168 / 2.2150; 3 teeth 3.4782 / 3.4763; 4 teeth 4.7395 / 4.7377. Theoretical teeth to span 2.92 → use 3. Min face width 1.613.</p></details>
+<p><a href="https://grok.com/?q=Why%20does%20measuring%20span%20over%20teeth%20on%20a%20helical%20gear%20require%20a%20minimum%20face%20width%20equal%20to%20span%20times%20sine%20of%20base%20helix%20angle%3F" target="_blank" rel="noopener">Ask Grok about face width</a></p></div>
+
+<section class="card"><h2>Notes on the original</h2>
+<p class="flag">This app reproduces all 133 formula cells of the spreadsheet, including its rounded constants (π = 3.141592654, 0.017453293, 57.29577951). As in the original, CR MAX is computed from the MIN-MOB X value and CR MIN from the MAX-MOB X value (thicker teeth → larger CR), and the method assumes an even tooth count (balls in opposite spaces).</p></section>
+</main>
+<footer class="site-footer">Original app by Roger Blake (Herringbone Gear Tech Services). Browser version by Ram-Gear Manufacturing Inc.</footer>
+</body></html>
